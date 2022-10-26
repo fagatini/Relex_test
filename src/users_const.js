@@ -2,7 +2,8 @@ export let Users = [
     {
         id:1,
         FIO: 'Stas Kirillov Olegovich',
-        attempts: [{
+        attempts: [
+        {
             attemptId: 1,
             testId: 1,
             title:'math',
@@ -42,7 +43,17 @@ export let Users = [
     {
         id:2,
         FIO: 'Kirill Ivanov Sergeevich',
-        attempts: []
+        attempts: [
+            {
+                attemptId: 1,
+                testId: 1,
+                title:'math',
+                answers: ['two', '1', 'APM'],
+                result: [true, true, false],
+                date: '20-01-2021 21:00',
+                timeSpent: '20 min'
+            },
+        ]
     },    
     {
         id:3,

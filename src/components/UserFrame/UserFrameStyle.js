@@ -6,13 +6,13 @@ export const StatisticBox = styled(Box)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 600px;
-    height: 460px;
+    width: 540px;
+    height: 390px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     background-color: #e2f4f6;
     border-radius: 30px;
-    padding: 4px;
+    padding: 35px;
 `
 
 export const ButtonStyled = styled.button`
@@ -48,4 +48,11 @@ export const Wrapper = styled.div`
 export const TextStyled = styled.div`
     font-size: 18px;
     font-weight:500;
+
+    padding-bottom:10px;
+`
+
+export const FlowAttemptsBlock = styled.div`
+    overflow-y: auto; 
+    max-height: 170px;
 `

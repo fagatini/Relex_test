@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import userStore from "../../store/profilesStore";
 import testsStore from "../../store/testsStore";
 import { observer } from "mobx-react-lite";
 import Modal from "@mui/material/Modal";
 import {
   ButtonStyled,
+  FlowAttemptsBlock,
   StatisticBox,
   TextStyled,
   Wrapper,
@@ -56,11 +56,18 @@ export const UserFrame = observer(({ user }) => {
     const scoreSum = testAttempts.reduce((sum, elem) => {
       return sum + elem.result.filter((answer) => answer === true).length;
     }, 0);
-    setAvgScores(
-      scoreSum / (testAttempts.length * testAttempts[0]?.result.length)
-    );
+    setAvgScores(scoreSum / testAttempts.length);
 
-    // setAllAttempts(testAttempts);
+    setAllAttempts(
+      testAttempts.map((attempt) => ({
+        attemptId: attempt.attemptId,
+        date: attempt.date,
+        timeSpent: attempt.timeSpent,
+        count: attempt.result.reduce((sum, elem) => {
+          return elem ? sum + 1 : sum;
+        }, 0),
+      }))
+    );
   }, [selectedTest]);
 
   return (
@@ -83,6 +90,7 @@ export const UserFrame = observer(({ user }) => {
               value={selectedTest}
               label="Test"
               onChange={handleChange}
+              sx={{ width: "200px", backgroundColor: "white" }}
             >
               {passedTests.map((test) => (
                 <MenuItem key={test.id} value={test.id}>
@@ -91,15 +99,31 @@ export const UserFrame = observer(({ user }) => {
               ))}
             </Select>
           </FormControl>
-          {attemptsNumber}
-          {"  "}
-          {succesCount}
-          {"  "}
-          {succesPercent}%{"  "}
-          {avgScores}
-          {"  "}
-          {allAttempts}
-          {"  "}
+          {selectedTest ? (
+            <>
+              <TextStyled>
+                Общее количество попыток: {attemptsNumber}
+              </TextStyled>
+              <TextStyled>
+                Количество успешно пройденных тестов: {succesCount}
+              </TextStyled>
+              <TextStyled>
+                Процент успешно пройденных тестов: {parseInt(succesPercent)}%
+              </TextStyled>
+              <TextStyled>Средний балл: {avgScores.toFixed(2)}</TextStyled>
+              <FlowAttemptsBlock>
+                {allAttempts.map((attempt, index) => (
+                  <TextStyled key={attempt.attemptId}>
+                    {index + 1}) дата и время прохождения {attempt.date};
+                    затраченное время: {attempt.timeSpent}; количество
+                    правильных ответов: {attempt.count}
+                  </TextStyled>
+                ))}
+              </FlowAttemptsBlock>
+            </>
+          ) : (
+            <TextStyled>Выберите тест</TextStyled>
+          )}
         </StatisticBox>
       </Modal>
     </Wrapper>
