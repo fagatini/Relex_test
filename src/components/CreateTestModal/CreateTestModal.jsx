@@ -13,11 +13,12 @@ import {
 
 export default function CreateTestModal() {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const [title, setTitle] = useState("");
   const [questionList, setQuestionList] = useState([]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const addQuestion = (quest) => {
     setQuestionList([...questionList, quest]);
@@ -47,14 +48,6 @@ export default function CreateTestModal() {
               value={title}
               placeholder="title"
             ></InputStyled>
-            {/* {questionList.length !== 0 ? (
-            <select onChange={}>
-              {questionList.map((quest, index) => (
-                <option key={quest.text}>{index + 1}</option>
-              ))}
-              <option selected>{questionList.length + 1}</option>
-            </select>
-          ) : null} */}
             {questionList.length >= 5 ? (
               <ButtonStyled onClick={() => onSaveClick()}>
                 save test

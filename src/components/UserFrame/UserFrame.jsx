@@ -13,8 +13,6 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 export const UserFrame = observer(({ user }) => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const [selectedTest, setSelectedTest] = useState("");
   const [passedTests, setPassedTests] = useState([]);
@@ -24,6 +22,9 @@ export const UserFrame = observer(({ user }) => {
   const [succesPercent, setSuccesPercent] = useState(null);
   const [avgScores, setAvgScores] = useState(null);
   const [allAttempts, setAllAttempts] = useState([]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const idArray = [
